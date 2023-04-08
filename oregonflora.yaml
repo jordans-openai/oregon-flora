@@ -1,0 +1,237 @@
+openapi: 3.0.0
+info:
+  title: Plant Search API
+  version: 1.0.1
+  description: A simple API to search plants based on various characteristics.
+servers:
+  - url: PLUGIN_HOSTNAME
+paths:
+  /search:
+    post:
+      operationId: searchPlants
+      summary: Search plants based on various characteristics
+      description: Returns a list of plants that match the given characteristics.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                search:
+                  type: string
+                  description: Search plants by name.
+                sunlight:
+                  type: string
+                  enum: ["", "680-1", "680-2", "680-3"]
+                  description: >
+                    Sunlight conditions:
+                    - 680-1: Sun
+                    - 680-2: Part-Shade
+                    - 680-3: Full-Shade
+                moisture:
+                  type: string
+                  enum: ["", "683-1", "683-2", "683-3"]
+                  description: >
+                    Moisture conditions:
+                    - 683-1: Dry
+                    - 683-2: Moderate
+                    - 683-3: Wet
+                height:
+                  type: string
+                  description: Height range in feet (e.g., "45-50+")
+                width:
+                  type: string
+                  description: Width range in feet (e.g., "0-80")
+                flower_color:
+                  type: array
+                  items:
+                    type: string
+                    enum: ["612-5", "612-9", "612-2", "612-7", "612-10", "612-1", "612-8", "612-4", "612-6", "612-3", "612-11"]
+                  description: >
+                    Flower colors:
+                    - 612-5: white
+                    - 612-9: pink
+                    - 612-2: red
+                    - 612-7: orange
+                    - 612-10: yellow
+                    - 612-1: green
+                    - 612-8: blue
+                    - 612-4: purple
+                    - 612-6: brown
+                    - 612-3: black
+                    - 612-11: flowers diminutive
+                bloom_months:
+                  type: array
+                  items:
+                    type: string
+                    enum: ["165-1", "165-2", "165-3", "165-4", "165-5", "165-6", "165-7", "165-8", "165-9", "165-10", "165-11", "165-12"]
+                  description: >
+                    Bloom months:
+                    - 165-1: January
+                    - 165-2: February
+                    - 165-3: March
+                    - 165-4: April
+                    - 165-5: May
+                    - 165-6: June
+                    - 165-7: July
+                    - 165-8: August
+                    - 165-9: September
+                    - 165-10: October
+                    - 165-11: November
+                    - 165-12: December
+                wildlife_support:
+                  type: array
+                  items:
+                    type: string
+                    enum: ["685-2", "685-3", "685-1", "685-5", "685-6"]
+                  description: >
+                    Wildlife support:
+                    - 685-2: bees and other insect pollinators
+                    - 685-3: beneficial insects/pest eating insects
+                    - 685-1: adult butterflies/nectar source
+                    - 685-5: caterpillar host plant/larval food source
+                    - 685-6: hummingbirds
+                lifespan:
+                  type: array
+                  items:
+                    type: string
+                    enum: ["136-1", "136-2", "136-3"]
+                  description: >
+                    Lifespan:
+                      - 136-1: annual
+                      - 136-2: biennial
+                      - 136-3: perennial
+                foliage_type:
+                  type: array
+                  items:
+                    type: string
+                    enum: ["100-1", "100-2", "100-3"]
+                  description: >
+                    Foliage type:
+                      - 100-1: deciduous
+                      - 100-2: evergreen
+                      - 100-3: plants without leaves
+                plant_type:
+                  type: array
+                  items:
+                    type: string
+                    enum: ["137-1", "137-2", "137-3", "137-4", "137-5", "137-6"]
+                  description: >
+                    Plant type:
+                      - 137-1: herb
+                      - 137-2: shrub
+                      - 137-3: tree
+                      - 137-4: grass or grass-like
+                      - 137-5: fern or fern ally
+                      - 137-6: vine
+                landscape_uses:
+                  type: array
+                  items:
+                    type: string
+                    enum: ["679-1", "679-2", "679-8", "679-9", "679-3", "679-4", "679-10", "679-5", "679-6", "679-7"]
+                  description: >
+                    Landscape uses:
+                      - 679-1: clump/tuft-forming
+                      - 679-2: erosion control
+                      - 679-8: grazing
+                      - 679-9: green roof
+                      - 679-3: groundcover
+                      - 679-4: hedgerow
+                      - 679-10: rangeland revegetation
+                      - 679-5: screen
+                      - 679-6: thicket-forming
+                      - 679-7: windbreak
+                cultivation_preferences:
+                  type: array
+                  items:
+                    type: string
+                    enum: ["767-2", "767-5", "767-6", "767-7", "767-8"]
+                  description: >
+                    Cultivation preferences:
+                      - 767-2: drought tolerant
+                      - 767-5: moist soils
+                      - 767-6: tolerates constant flooding
+                      - 767-7: tolerates seasonal wet
+                      - 767-8: well-drained
+                behavior:
+                  type: array
+                  items:
+                    type: string
+                    enum: ["688-1", "688-2", "688-3", "688-4"]
+                  description: >
+                    Behavior:
+                      - 688-1: bulb or bulb-like structures
+                      - 688-2: runners (rhizomes, stolons, etc.)
+                      - 688-3: seed
+                      - 688-4: spores
+                propagation:
+                  type: array
+                  items:
+                    type: string
+                    enum: ["740-3", "740-5", "740-7", "740-4", "740-2", "740-1", "740-6"]
+                  description: >
+                    Propagation:
+                      - 740-3: direct- or self-seed
+                      - 740-5: seed with stratification
+                      - 740-7: seed with scarification
+                      - 740-4: seed with both scarification and stratification
+                      - 740-2: division/separation
+                      - 740-1: cuttings
+                      - 740-6: spores
+                ease_of_growth:
+                  type: array
+                  items:
+                    type: string
+                    enum: ["684-1", "684-2", "684-3"]
+                  description: >
+                    Ease of growth:
+                      - 684-1: easy
+                      - 684-2: moderate
+                      - 684-3: hard
+
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        tid:
+                          type: integer
+                          description: The taxonomic identifier (tid) of the taxa.
+                        family:
+                          type: string
+                          description: The family name of the taxa.
+                        sciname:
+                          type: string
+                          description: The scientific name of the taxa.
+                        parenttid:
+                          type: integer
+                          description: The taxonomic identifier (tid) of the parent taxa.
+                        author:
+                          type: string
+                          description: The author of the taxa.
+                        imgid:
+                          type: integer
+                          description: The image identifier (imgid) of the taxa.
+                        vernacular_basename:
+                          type: string
+                          description: The base vernacular name of the taxa.
+                        vernacular_names:
+                          type: array
+                          items:
+                            type: string
+                          description: The list of vernacular names of the taxa.
+                        image:
+                          type: string
+                          description: The image URL of the taxa.
+                required:
+                  - data
+

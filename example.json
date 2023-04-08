@@ -1,0 +1,54 @@
+{
+  "clid": 54,
+  "pid": 3,
+  "dynclid": -1,
+  "projName": "",
+  "title": "Grow Natives Complete Collection",
+  "intro": "",
+  "iconUrl": "",
+  "authors": "",
+  "abstract": "",
+  "taxa": [
+    {
+      "tid": 8027,
+      "family": "Alismataceae",
+      "sciname": "Sagittaria latifolia",
+      "parenttid": 1385,
+      "author": "Willd.",
+      "imgid": 23769515,
+      "vernacular": {
+        "basename": "wapato",
+        "names": [
+          "wapato",
+          "broadleaf arrowhead",
+          "duck potato"
+        ]
+      },
+      "image": "\/imglib\/OF_FP\/201905\/DIG21964_1558125747_tn.jpg"
+    },
+    {
+      "tid": 5429,
+      "family": "Amaranthaceae",
+      "sciname": "Grayia spinosa",
+      "parenttid": 861,
+      "author": "(Hook.) Moq.",
+      "imgid": 23759534,
+      "vernacular": {
+        "basename": "hopsage",
+        "names": [
+          "hopsage"
+        ]
+      },
+      "image": "\/imglib\/_OFPFP\/201704\/GRA_SPI_0354B_1492399124_tn.jpg"
+    }
+  ],
+  "tids": [
+    8027,
+    5429
+  ],
+  "characteristics": [],
+  "lat": 0,
+  "lng": 0,
+  "locality": "",
+  "type": ""
+}

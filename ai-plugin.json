@@ -1,0 +1,18 @@
+{
+  "schema_version": "v1",
+  "name_for_human": "Oregon Native Plant Guide",
+  "name_for_model": "oregon_native_plant_guide",
+  "description_for_human": "A plugin for the Oregon Native Gardening Plant Guide",
+  "description_for_model": "Plugin to allow searching for native gardening and landscaping plant suggestions for the state of Oregon, USA. Render responses in a markdown table including the images",
+  "auth": {
+    "type": "none"
+  },
+  "api": {
+    "type": "openapi",
+    "url": "PLUGIN_HOSTNAME/openapi.yaml",
+    "is_user_authenticated": false
+  },
+  "logo_url": "PLUGIN_HOSTNAME/logo.png",
+  "contact_email": "jordans@openai.com",
+  "legal_info_url": "https://example.com/legal"
+}
