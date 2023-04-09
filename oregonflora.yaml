@@ -2,10 +2,123 @@ openapi: 3.0.0
 info:
   title: Plant Search API
   version: 1.0.1
-  description: A simple API to search plants based on various characteristics.
+  description: An API to search plants native to Oregon based on various characteristics.
 servers:
   - url: PLUGIN_HOSTNAME
 paths:
+
+  /detail/{tid}:
+    get:
+      operationId: getPlantDetail
+      summary: Get details of a certain plant
+      description: Returns a payload of details for a single plant.
+      parameters:
+        - name: tid
+          in: path
+          description: The tid (taxon id) of the plant to get details for.
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  tid:
+                    type: integer
+                    description: The taxonomic identifier (tid) of the taxa.
+                  sciname:
+                    type: string
+                    description: The scientific name of the taxa.
+                  author:
+                    type: string
+                    description: The author of the taxa.
+                  parentTid:
+                    type: integer
+                    description: The taxonomic identifier (tid) of the parent taxa.
+                  rankId:
+                    type: integer
+                    description: The rank identifier (rankId) of the taxa.
+                  descriptions:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        caption:
+                          type: string
+                        source:
+                          type: string
+                        url:
+                          type: string
+                        desc:
+                          type: object
+                          additionalProperties:
+                            type: string
+                  gardenDescription:
+                    type: string
+                  gardenId:
+                    type: integer
+                  imagesBasis:
+                    type: object
+                    additionalProperties:
+                      type: array
+                      items:
+                        type: string
+                  vernacular:
+                    type: object
+                    properties:
+                      basename:
+                        type: string
+                      names:
+                        type: array
+                        items:
+                          type: string
+                  synonyms:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        sciname:
+                          type: string
+                        author:
+                          type: string
+                        tid:
+                          type: integer
+                  ambiguousSynonyms:
+                    type: array
+                    items:
+                      type: string
+                  taxalinks:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        url:
+                          type: string
+                        title:
+                          type: string
+                  rarePlantFactSheet:
+                    type: string
+                  origin:
+                    type: string
+                  family:
+                    type: string
+                  characteristics:
+                    type: object
+                    properties:
+                    # Add properties as needed for characteristics
+                  spp:
+                    type: array
+                    items:
+                      type: string
+                  checklists:
+                    type: array
+                    items:
+                      type: integer
+
   /search:
     post:
       operationId: searchPlants
@@ -189,49 +302,53 @@ paths:
                       - 684-1: easy
                       - 684-2: moderate
                       - 684-3: hard
+                ecoregions:
+                  type: array
+                  items:
+                    type: string
+                    enum: ["19-1", "19-2", "19-3", "19-4", "19-5", "19-6", "19-7", "19-8", "19-9", "19-10", "19-11"]
+                  description: >
+                    (Can select multiple)
+                    Ecoregions:
+                      - 19-1: Basin and Range
+                      - 19-2: Blue and Wallowa Mountains
+                      - 19-3: Cascades
+                      - 19-4: Coast Range
+                      - 19-5: Columbia Basin
+                      - 19-6: Eastern Cascade Slopes and Foothills
+                      - 19-7: Estuarine Coast
+                      - 19-8: Lava Plains
+                      - 19-9: Owyhee Uplands
+                      - 19-10: Siskiyou Mountains
+                      - 19-11: Willamette Valley
+                habitat:
+                  type: array
+                  items:
+                    type: string
+                    enum: ["163-1", "163-2", "163-3", "163-4", "163-5", "163-6", "163-7", "163-8", "163-9", "163-10", "163-11", "163-12", "163-13"]
+                  description: >
+                    Habitat:
+                      - 163-1: alpine
+                      - 163-2: brackish water
+                      - 163-3: flowing water
+                      - 163-4: forest
+                      - 163-5: freshwater wetlands
+                      - 163-6: grassland or meadow
+                      - 163-7: oak savannah
+                      - 163-8: bare or rock-covered ground
+                      - 163-9: saltwater
+                      - 163-10: open sandy ground, dunes, or beach
+                      - 163-11: shrub, scrub or chaparral
+                      - 163-12: freshwater pond or lake
+                      - 163-13: disturbed sites
 
       responses:
         '200':
           description: OK
           content:
-            application/json:
+            text/csv:
               schema:
-                type: object
-                properties:
-                  data:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        tid:
-                          type: integer
-                          description: The taxonomic identifier (tid) of the taxa.
-                        family:
-                          type: string
-                          description: The family name of the taxa.
-                        sciname:
-                          type: string
-                          description: The scientific name of the taxa.
-                        parenttid:
-                          type: integer
-                          description: The taxonomic identifier (tid) of the parent taxa.
-                        author:
-                          type: string
-                          description: The author of the taxa.
-                        imgid:
-                          type: integer
-                          description: The image identifier (imgid) of the taxa.
-                        vernacular_basename:
-                          type: string
-                          description: The base vernacular name of the taxa.
-                        vernacular_names:
-                          type: array
-                          items:
-                            type: string
-                          description: The list of vernacular names of the taxa.
-                        image:
-                          type: string
-                          description: The image URL of the taxa.
-                required:
-                  - data
-
+                type: string
+              example: |
+                tid,family,sciname,parenttid,author,imgid,vernacular_basename,vernacular_names,image
+                8027,Alismataceae,Sagittaria latifolia,1385,Willd.,23769515,wapato,"wapato,broadleaf arrowhead,duck potato",/imglib/OF_FP/201905/DIG21964_1558125747_tn.jpg
